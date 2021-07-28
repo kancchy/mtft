@@ -46,6 +46,7 @@ class ViewDetailController: UIViewController , UIPickerViewDelegate, UIPickerVie
     let gameList = [1,2,6]
     // UIPickerViewの列の数
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        pickerView.setValue(UIColor.black, forKeyPath: "textColor")
         return 1
     }
     // UIPickerViewの行数、リストの数
