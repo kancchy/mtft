@@ -66,10 +66,10 @@ class VerticalMatchScreenOperationsPresenter : MatchScreenOperationsParentPresen
         let label = UILabel()
         newView.addSubview(label);
         // 背景を緑に設定
-        newView.backgroundColor = UIColor.white
+        newView.backgroundColor = UIColor.yellow
         // 枠線を設定
         newView.layer.borderColor = UIColor.black.cgColor
-        newView.layer.borderWidth = 1.0
+      //  newView.layer.borderWidth = 1.0
         // 追加されたViewがわかりやすいように、ナンバリング
         label.text = "\(convertedPoint)"
         label.sizeToFit()
@@ -78,6 +78,8 @@ class VerticalMatchScreenOperationsPresenter : MatchScreenOperationsParentPresen
         newView.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
         newView.widthAnchor.constraint(equalToConstant: 200.0).isActive = true
         newView.translatesAutoresizingMaskIntoConstraints = false
+        newView.layer.cornerRadius = 50;
+
         return newView;
     }
     
@@ -87,10 +89,10 @@ class VerticalMatchScreenOperationsPresenter : MatchScreenOperationsParentPresen
         let label = UILabel()
         newView.addSubview(label);
         // 背景を緑に設定
-        newView.backgroundColor = UIColor.white
+        newView.backgroundColor = UIColor.yellow
         // 枠線を設定
         newView.layer.borderColor = UIColor.black.cgColor
-        newView.layer.borderWidth = 1.0
+       // newView.layer.borderWidth = 1.0
         // 追加されたViewがわかりやすいように、ナンバリング
         label.text = "\(convertedPoint)"
         label.sizeToFit()
@@ -98,6 +100,7 @@ class VerticalMatchScreenOperationsPresenter : MatchScreenOperationsParentPresen
         // 新規Viewに height=100 の制約を追加 ←【超重要】
         newView.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
         newView.translatesAutoresizingMaskIntoConstraints = false
+        newView.layer.cornerRadius = 10;
         return newView;
     }
 }
