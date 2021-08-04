@@ -17,31 +17,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="394" placeholderIntrinsicHeight="infinite" translatesAutoresizingMaskIntoConstraints="NO" id="soU-s5-IuW">
-                                <rect key="frame" x="5" y="250" width="418" height="400"/>
+                                <rect key="frame" x="5" y="199" width="418" height="653"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ebc-0J-vm2" userLabel="LeftFirstBtn">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ebc-0J-vm2" userLabel="LeftFirstBtn">
                                         <rect key="frame" x="70" y="160" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="tapLeftFirstBtn:" destination="p5N-Rg-1wr" eventType="touchUpInside" id="ghG-dH-WRZ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZiC-mM-1nZ" userLabel="LightFirstBtn">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZiC-mM-1nZ" userLabel="LightFirstBtn">
                                         <rect key="frame" x="216" y="160" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="tapRightFirstBtn:" destination="p5N-Rg-1wr" eventType="touchUpInside" id="sdI-jp-ZJ2"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="QrN-bA-afl">
-                                        <rect key="frame" x="0.0" y="0.0" width="209" height="400"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" systemColor="labelColor"/>
-                                        <gestureRecognizers/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="dtn-SE-JJO" appends="YES" id="etX-UZ-UbV"/>
-                                        </connections>
-                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="pJ9-2E-g6p">
                                         <rect key="frame" x="209" y="0.0" width="209" height="400"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -49,6 +42,15 @@
                                         <gestureRecognizers/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="Gy8-RK-gM5" appends="YES" id="EBJ-12-5o2"/>
+                                        </connections>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="QrN-bA-afl">
+                                        <rect key="frame" x="0.0" y="0.0" width="209" height="400"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="dtn-SE-JJO" appends="YES" id="etX-UZ-UbV"/>
                                         </connections>
                                     </stackView>
                                 </subviews>
@@ -60,7 +62,6 @@
                                     <constraint firstAttribute="bottom" secondItem="QrN-bA-afl" secondAttribute="bottom" id="hWS-YA-tyy"/>
                                     <constraint firstItem="pJ9-2E-g6p" firstAttribute="leading" secondItem="QrN-bA-afl" secondAttribute="trailing" id="j49-lZ-viE"/>
                                     <constraint firstItem="pJ9-2E-g6p" firstAttribute="width" secondItem="soU-s5-IuW" secondAttribute="width" multiplier="0.5" id="qFA-cU-xg9"/>
-                                    <constraint firstItem="ZiC-mM-1nZ" firstAttribute="leading" secondItem="Ebc-0J-vm2" secondAttribute="trailing" constant="100" id="vSs-hD-aGF"/>
                                     <constraint firstItem="QrN-bA-afl" firstAttribute="top" secondItem="soU-s5-IuW" secondAttribute="top" id="xe2-8m-BdK"/>
                                     <constraint firstItem="pJ9-2E-g6p" firstAttribute="top" secondItem="soU-s5-IuW" secondAttribute="top" id="zhC-cd-f2L"/>
                                 </constraints>

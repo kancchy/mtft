@@ -16,7 +16,7 @@ class VerticalMatchScreenOperationsPresenter : MatchScreenOperationsParentPresen
         // stackViewにnewViewを追加する
         delegate?.leftGameLineParent.insertArrangedSubview(createStackViewCell(convertedPoint: dispPoint1), at: 0)
 
-        delegate?.rightGameLineParent.insertArrangedSubview(createStackViewCell2(convertedPoint: dispPoint2), at: 0)
+        delegate?.rightGameLineParent.insertArrangedSubview(createStackViewCell(convertedPoint: dispPoint2), at: 0)
     }
     
     override func addSetCount(score:Score) {
@@ -66,41 +66,32 @@ class VerticalMatchScreenOperationsPresenter : MatchScreenOperationsParentPresen
         let label = UILabel()
         newView.addSubview(label);
         // 背景を緑に設定
-        newView.backgroundColor = UIColor.yellow
+        newView.backgroundColor = UIColor.white
         // 枠線を設定
         newView.layer.borderColor = UIColor.black.cgColor
-      //  newView.layer.borderWidth = 1.0
+        newView.layer.borderWidth = 1.0
         // 追加されたViewがわかりやすいように、ナンバリング
         label.text = "\(convertedPoint)"
         label.sizeToFit()
         label.textColor = UIColor.black
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        newView.addSubview(label);
+        NSLayoutConstraint.activate([
+            label.widthAnchor.constraint(equalTo: newView.widthAnchor, multiplier: 0.15),
+            label.heightAnchor.constraint(equalTo: newView.heightAnchor, multiplier: 0.5)
+        ])
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: newView.centerXAnchor, constant: 0),
+            label.centerYAnchor.constraint(equalTo: newView.centerYAnchor, constant: 0)
+        ])
+
         // 新規Viewに height=100 の制約を追加 ←【超重要】
         newView.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
         newView.widthAnchor.constraint(equalToConstant: 200.0).isActive = true
-        newView.translatesAutoresizingMaskIntoConstraints = false
-        newView.layer.cornerRadius = 50;
+//        newView.translatesAutoresizingMaskIntoConstraints = false
+//        newView.layer.cornerRadius = 50;
 
-        return newView;
-    }
-    
-    func createStackViewCell2(convertedPoint:String) -> UIView {
-        // 新規追加するViewを作成
-        let newView = UIView()
-        let label = UILabel()
-        newView.addSubview(label);
-        // 背景を緑に設定
-        newView.backgroundColor = UIColor.yellow
-        // 枠線を設定
-        newView.layer.borderColor = UIColor.black.cgColor
-       // newView.layer.borderWidth = 1.0
-        // 追加されたViewがわかりやすいように、ナンバリング
-        label.text = "\(convertedPoint)"
-        label.sizeToFit()
-        label.textColor = UIColor.black
-        // 新規Viewに height=100 の制約を追加 ←【超重要】
-        newView.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
-        newView.translatesAutoresizingMaskIntoConstraints = false
-        newView.layer.cornerRadius = 10;
         return newView;
     }
 }
