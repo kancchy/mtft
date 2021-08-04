@@ -24,6 +24,12 @@ class MatchPresenter:MatchProtocol{
     var set:Set = Set();
     var score:Score = Score();
 
+    func startNewScore(serverName:String){
+        score = Score();
+        self.startNewSet(serverName:serverName);
+        score.setNumOneScore = delegate!.receivedSetCount
+    }
+    
     func scoredPoint(scoredTeam: String){
         game.activePoint.scoredTeam = scoredTeam
         // Gameが終わっているか判定
@@ -42,8 +48,9 @@ class MatchPresenter:MatchProtocol{
     }
     
     func startNewSet(serverName:String){
-        set = Set();        
+        set = Set();
         self.startNewGame(serverName:serverName)
+        set.gameNumOneSet = delegate!.receivedGameCount
         screenOperator?.addSetCount(score:score);
     }
     

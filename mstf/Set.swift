@@ -11,7 +11,7 @@ class Set {
     private (set) var numberOfGamesForTeamA:Int = 0 ;
     private (set) var numberOfGamesForTeamB:Int = 0 ;
     private (set) var breakGames:[Int]? ;
-    private (set) var gameNumOneSet:Int = 6 ;
+    var gameNumOneSet:Int = 6 ;
 
     func scored(game:Game?){
         gameCount.append(game!);

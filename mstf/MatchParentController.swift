@@ -43,6 +43,9 @@ class MatchParentController: UIViewController {
     var serverPlayerName2 = "";
     var date = "";
     var singlesFlag = false;
+    
+    var receivedSetCount:Int = 0;
+    var receivedGameCount:Int = 0;
 
     // プレゼンターの初期化
     let presenter = MatchPresenter()
@@ -96,7 +99,6 @@ class MatchParentController: UIViewController {
         presenter.delegate = self
         presenter.screenOperator = MatchScreenOperationsParentPresenter();
         presenter.screenOperator?.delegate = self
-
-        presenter.startNewSet(serverName:serverTeamName)
+        presenter.startNewScore(serverName:serverTeamName)
     }
 }

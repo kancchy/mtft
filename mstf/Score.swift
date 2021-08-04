@@ -13,7 +13,7 @@ class Score {
     private (set) var setCount:[Set] = [];
     private (set) var numberOfSetsForTeamA:Int = 0 ;
     private (set) var numberOfSetsForTeamB:Int = 0 ;
-    private (set) var setNumOneScore:Int = 3 ;
+    var setNumOneScore:Int = 1 ;
 
     func scored(set:Set?){
         setCount.append(set!);
@@ -28,6 +28,29 @@ class Score {
     func isFinish(teamName:String) -> Bool{
         print("set count:" + numberOfSetsForTeamA.description);
         print("set count:" + numberOfSetsForTeamB.description);
+        
+        if setNumOneScore >= 1{
+            return self.isWinMulti(teamName:teamName)
+        }else{
+            return self.isWinSingle(teamName:teamName)
+        }
+    }
+    
+    func isWinMulti(teamName:String) -> Bool{
+        
+        let calcA:Double = Double(numberOfSetsForTeamA) / Double(setNumOneScore)
+        let calcB:Double = Double(numberOfSetsForTeamB) / Double(setNumOneScore)
+        
+        if numberOfSetsForTeamA > numberOfSetsForTeamB && round(calcA) >= 1.0 && teamName == "A" {
+            return true
+        } else if numberOfSetsForTeamB < numberOfSetsForTeamB && round(calcB) >= 1.0 && teamName == "B" {
+            return true
+        } else{
+            return false
+        }
+    }
+    
+    func isWinSingle(teamName:String) -> Bool{
         if numberOfSetsForTeamA > numberOfSetsForTeamB && numberOfSetsForTeamA >= setNumOneScore && teamName == "A" {
             return true
         } else if numberOfSetsForTeamB < numberOfSetsForTeamB && numberOfSetsForTeamB >= setNumOneScore && teamName == "B" {

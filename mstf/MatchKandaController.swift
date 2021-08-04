@@ -9,11 +9,6 @@ import UIKit
 
 class MatchKandaController : MatchParentController {
 
-    //var startDate = "";
-    //var serverTeamName = "";
-    var receivedSetCount = "";
-    var receivedGameCOunt = "";
-
     override func viewDidLoad() {
         player1Name.text = inputPlayerName1;
         player2Name.text = inputPlayerName2;
@@ -41,9 +36,6 @@ class MatchKandaController : MatchParentController {
 //        super.fault2BtnParent = self.fault2Btn
         super.viewDidLoad()
 
-        print("startDate:" + startDate)
-        print("セット数：" + receivedSetCount)
-        print("ゲーム数：" + receivedGameCOunt)
     }
     
     @IBOutlet weak var player1Name: UILabel!
