@@ -7,8 +7,23 @@
 
 import Foundation
 
-class TieBreak{
-    private (set) var gamePoint:[GamePointForTieBreak]!;
-    private (set) var gamePointCountTeamA:Int? ;
-    private (set) var gamePointCountTeamB:Int? ;
+class TieBreak : GameParent{
+    init() {
+        super.init(pointBeforeTheEnd: 6)
+        activePoint = GamePointForTieBreak();
+    };
+
+    override func scored(point:PointParent){
+        gamePoint.append(point)
+        if point.scoredTeam == "A" {
+            gamePointCountTeamA += 1
+        } else {
+            gamePointCountTeamB += 1
+        }
+        activePoint = GamePointForTieBreak()
+    }
+    
+    override func cnvPoint(point:Int) -> String{
+        return point.description;
+    }
 }
