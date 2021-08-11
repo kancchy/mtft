@@ -43,7 +43,7 @@ class Score {
         
         if numberOfSetsForTeamA > numberOfSetsForTeamB && round(calcA) >= 1.0 && teamName == "A" {
             return true
-        } else if numberOfSetsForTeamB < numberOfSetsForTeamB && round(calcB) >= 1.0 && teamName == "B" {
+        } else if numberOfSetsForTeamA < numberOfSetsForTeamB && round(calcB) >= 1.0 && teamName == "B" {
             return true
         } else{
             return false
@@ -53,7 +53,7 @@ class Score {
     func isWinSingle(teamName:String) -> Bool{
         if numberOfSetsForTeamA > numberOfSetsForTeamB && numberOfSetsForTeamA >= setNumOneScore && teamName == "A" {
             return true
-        } else if numberOfSetsForTeamB < numberOfSetsForTeamB && numberOfSetsForTeamB >= setNumOneScore && teamName == "B" {
+        } else if numberOfSetsForTeamA < numberOfSetsForTeamB && numberOfSetsForTeamB >= setNumOneScore && teamName == "B" {
             return true
         } else{
             return false

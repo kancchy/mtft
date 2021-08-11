@@ -20,7 +20,7 @@ extension MatchProtocol{
 class MatchPresenter:MatchProtocol{
     var screenOperator:MatchScreenOperationsParentPresenter? = nil;
     var delegate:MatchParentController? = nil;
-    var game:Game = Game();
+    var game:GameParent = Game();
     var set:Set = Set();
     var score:Score = Score();
 
@@ -58,10 +58,7 @@ class MatchPresenter:MatchProtocol{
         game = Game();
         game.server = serverName
         screenOperator?.changeServerTeamBackgroundColor(serverName: serverName);
-        
-        
         screenOperator?.disableFaultBtn(teamName:game.server)
-        
         // セット内2ゲーム目までかどうかを判定し、2ゲーム以内ならばポップアップを出す
         if set.isDisplaySelectServerPopup(){
             // ポップアップ出す場合
@@ -69,8 +66,11 @@ class MatchPresenter:MatchProtocol{
         }
     }
     
-    func startNewTieBreak(){
-        // Gameではなく、Tiebreak
+    func startTieBreak(serverName:String){
+        game = TieBreak();
+        game.server = serverName
+        screenOperator?.changeServerTeamBackgroundColor(serverName: serverName);
+        screenOperator?.disableFaultBtn(teamName:game.server)
     }
     
     // ポップアップを出す、引数にチーム名
@@ -122,7 +122,7 @@ class MatchPresenter:MatchProtocol{
 
         if set.isTieBreak(){
             // タイブレークなので終了でない
-            self.startNewGame(serverName:set.getNextServerTeam())
+            self.startTieBreak(serverName:set.getNextServerTeam())
             return
         }
         
@@ -135,6 +135,7 @@ class MatchPresenter:MatchProtocol{
                 // ポイント数の初期化と画面反映
                 game = Game();
                 self.changeButtonLabel()
+                screenOperator?.addSetCount(score:score);
 
                 // TODO:試合終了ポップアップを出したい
                 return

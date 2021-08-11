@@ -7,13 +7,13 @@
 
 import Foundation
 class Set {
-    private (set) var gameCount:[Game] = [] ;
+    private (set) var gameCount:[GameParent] = [] ;
     private (set) var numberOfGamesForTeamA:Int = 0 ;
     private (set) var numberOfGamesForTeamB:Int = 0 ;
     private (set) var breakGames:[Int]? ;
     var gameNumOneSet:Int = 6 ;
     
-    func scored(game:Game?){
+    func scored(game:GameParent?){
         gameCount.append(game!);
         let teamName = game?.findTheNameOfTheTeamThatGotTheGame()
         if teamName == "A" {
@@ -24,11 +24,13 @@ class Set {
     }
     
     func isFinish(teamName:String) -> Bool{
+        let lastGameIsTibrake = gameCount.last is TieBreak
+        let plusCount:Int = (lastGameIsTibrake || gameNumOneSet == 1) ?1:2
                 
         // 取得したゲームが終了ゲーム数だったらtrue
-        if numberOfGamesForTeamA > numberOfGamesForTeamB && numberOfGamesForTeamA >= gameNumOneSet && teamName == "A" {
+        if numberOfGamesForTeamA >= numberOfGamesForTeamB + plusCount && numberOfGamesForTeamA >= gameNumOneSet && teamName == "A" {
             return true
-        } else if numberOfGamesForTeamA < numberOfGamesForTeamB && numberOfGamesForTeamB >= gameNumOneSet && teamName == "B" {
+        } else if numberOfGamesForTeamA + plusCount <= numberOfGamesForTeamB && numberOfGamesForTeamB >= gameNumOneSet && teamName == "B" {
             return true
         } else{
             return false

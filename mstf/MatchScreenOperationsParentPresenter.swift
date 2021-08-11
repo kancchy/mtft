@@ -12,7 +12,7 @@ import UIKit
 class MatchScreenOperationsParentPresenter{
     var delegate:MatchParentController? = nil;
 
-    func updatePoint(game:Game){
+    func updatePoint(game:GameParent){
         let dispPoint1 = game.cnvPoint(point:game.gamePointCountTeamA)
         let dispPoint2 = game.cnvPoint(point:game.gamePointCountTeamB)
         delegate?.point1BtnParent.setTitle(dispPoint1, for: .normal)

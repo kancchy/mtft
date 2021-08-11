@@ -10,7 +10,7 @@ import UIKit
 
 
 class VerticalMatchScreenOperationsPresenter : MatchScreenOperationsParentPresenter{
-    override func updatePoint(game:Game) {
+    override func updatePoint(game:GameParent) {
         let dispPoint1 = game.cnvPoint(point:game.gamePointCountTeamA)
         let dispPoint2 = game.cnvPoint(point:game.gamePointCountTeamB)
         // stackViewにnewViewを追加する
