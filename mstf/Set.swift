@@ -12,7 +12,7 @@ class Set {
     private (set) var numberOfGamesForTeamB:Int = 0 ;
     private (set) var breakGames:[Int]? ;
     var gameNumOneSet:Int = 6 ;
-
+    
     func scored(game:Game?){
         gameCount.append(game!);
         let teamName = game?.findTheNameOfTheTeamThatGotTheGame()
@@ -24,10 +24,8 @@ class Set {
     }
     
     func isFinish(teamName:String) -> Bool{
-        // 取得したポイントがAdまたは４０だったらgameを終わらせる
-        print("game count A::" + numberOfGamesForTeamA.description);
-        print("game count B::" + numberOfGamesForTeamB.description);
-
+                
+        // 取得したゲームが終了ゲーム数だったらtrue
         if numberOfGamesForTeamA > numberOfGamesForTeamB && numberOfGamesForTeamA >= gameNumOneSet && teamName == "A" {
             return true
         } else if numberOfGamesForTeamA < numberOfGamesForTeamB && numberOfGamesForTeamB >= gameNumOneSet && teamName == "B" {
@@ -63,5 +61,12 @@ class Set {
     
     public func findGame(gameNoLabel gameNo:Int) {
         
+    }
+    
+    func isTieBreak() -> Bool{
+        if numberOfGamesForTeamA == numberOfGamesForTeamB && numberOfGamesForTeamA == gameNumOneSet{
+            return true
+        }
+        return false
     }
 }

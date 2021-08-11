@@ -67,7 +67,10 @@ class MatchPresenter:MatchProtocol{
             // ポップアップ出す場合
             self.displayPopup(serverTeamName:serverName)
         }
-
+    }
+    
+    func startNewTieBreak(){
+        // Gameではなく、Tiebreak
     }
     
     // ポップアップを出す、引数にチーム名
@@ -114,11 +117,15 @@ class MatchPresenter:MatchProtocol{
 
     func finishGame(){
         set.scored(game: game);
-        print("set is finish:" + set.isFinish(teamName: game.findTheNameOfTheTeamThatGotTheGame()).description);
-        
         // 画面にゲームを反映
         screenOperator?.updateGameCount(set:set);
 
+        if set.isTieBreak(){
+            // タイブレークなので終了でない
+            self.startNewGame(serverName:set.getNextServerTeam())
+            return
+        }
+        
         if set.isFinish(teamName: game.findTheNameOfTheTeamThatGotTheGame()) {
             score.scored(set: set);
             if score.isFinish(teamName: set.findTheNameOfTheTeamThatGotTheSet()){
