@@ -67,6 +67,7 @@ class MatchPresenter:MatchProtocol{
             // ポップアップ出す場合
             self.displayPopup(serverTeamName:serverName)
         }else{
+            // 2ゲーム目以降はサーバープレイヤー名を取得する
             if game.server == "A"{
                 game.serverPlayerName = set.getNextServerName(playerName1:score.playerName1,playerName2:score.playerName3)
             }else{
@@ -75,6 +76,7 @@ class MatchPresenter:MatchProtocol{
         }
         // TODO:チームではなくサーバープレーヤーだけを色つけたい
         screenOperator?.changeServerTeamBackgroundColor(serverName: game.server);
+        //screenOperator?.changeServerTeamBackgroundColor(serverName: game.serverPlayerName);
     }
     
     func startTieBreak(serverName:String){
