@@ -14,6 +14,10 @@ class Score {
     private (set) var numberOfSetsForTeamA:Int = 0 ;
     private (set) var numberOfSetsForTeamB:Int = 0 ;
     var setNumOneScore:Int = 1 ;
+    var playerName1:String = "";
+    var playerName2:String = "";
+    var playerName3:String = "";
+    var playerName4:String = "";
 
     func scored(set:Set?){
         setCount.append(set!);

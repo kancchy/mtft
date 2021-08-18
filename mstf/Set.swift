@@ -60,7 +60,13 @@ class Set {
             return "A"
         }
     }
-    
+
+    // 次のサーバープレイヤー名を取得
+    func getNextServerName(playerName1:String,playerName2:String) -> String{
+        let lastIndex: Int? = gameCount.indices.last
+        return gameCount[lastIndex! - 1].serverPlayerName == playerName1 ? playerName2 : playerName1
+    }
+
     public func findGame(gameNoLabel gameNo:Int) {
         
     }
@@ -71,4 +77,5 @@ class Set {
         }
         return false
     }
+
 }

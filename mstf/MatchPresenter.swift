@@ -28,6 +28,10 @@ class MatchPresenter:MatchProtocol{
         score = Score();
         self.startNewSet(serverName:serverName);
         score.setNumOneScore = delegate!.receivedSetCount
+        score.playerName1 = delegate!.inputPlayerName1
+        score.playerName2 = delegate!.inputPlayerName2
+        score.playerName3 = delegate!.inputPlayerName3
+        score.playerName4 = delegate!.inputPlayerName4
     }
     
     func scoredPoint(scoredTeam: String){
@@ -57,13 +61,20 @@ class MatchPresenter:MatchProtocol{
     func startNewGame(serverName:String){
         game = Game();
         game.server = serverName
-        screenOperator?.changeServerTeamBackgroundColor(serverName: serverName);
         screenOperator?.disableFaultBtn(teamName:game.server)
         // セット内2ゲーム目までかどうかを判定し、2ゲーム以内ならばポップアップを出す
         if set.isDisplaySelectServerPopup(){
             // ポップアップ出す場合
             self.displayPopup(serverTeamName:serverName)
+        }else{
+            if game.server == "A"{
+                game.serverPlayerName = set.getNextServerName(playerName1:score.playerName1,playerName2:score.playerName3)
+            }else{
+                game.serverPlayerName = set.getNextServerName(playerName1:score.playerName2,playerName2:score.playerName4)
+            }
         }
+        // TODO:チームではなくサーバープレーヤーだけを色つけたい
+        screenOperator?.changeServerTeamBackgroundColor(serverName: game.server);
     }
     
     func startTieBreak(serverName:String){
