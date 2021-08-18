@@ -27,4 +27,3 @@ class TieBreak : GameParent{
         return point.description;
     }
 }
-
