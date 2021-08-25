@@ -9,9 +9,9 @@ import Foundation
 class GamePointForTieBreak : PointParent {
     private (set) public var pointPattern:PointPattern? ;
     var server:String?;
-    var serverPlayerName:String?;
     var receiver:String? ;
     init (server:String?, serverPlayerName:String?, receiver:String?) {
+        super.init()
         self.server = server;
         self.serverPlayerName = serverPlayerName;
         self.receiver = receiver;

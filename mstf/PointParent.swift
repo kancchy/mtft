@@ -9,4 +9,5 @@ import Foundation
 class PointParent {
     public var scoredTeam:String = "";
     public var fault:Bool = false;
+    public var serverPlayerName:String?;
 }

@@ -44,6 +44,10 @@ class MatchPresenter:MatchProtocol{
             self.finishGame();
         } else {
             game.scored(point: game.activePoint)
+            
+            if (set.isTieBreak()) {
+                screenOperator?.changeServerTeamBackgroundColor(serverName: game.server)
+            }
         }
     }
     
