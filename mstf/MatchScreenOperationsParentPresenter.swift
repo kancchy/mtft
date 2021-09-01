@@ -28,16 +28,26 @@ class MatchScreenOperationsParentPresenter{
         delegate?.rightSetNumParent.text = "\(score.numberOfSetsForTeamB)"
     }
     
-    func changeServerTeamBackgroundColor(serverName:String){
-        // 仮：サーバーチームを色変え
-        if serverName == "A"{
-            delegate?.player1NameParent.backgroundColor = UIColor.red
-            delegate?.player3NameParent.backgroundColor = UIColor.red
+    func changeServerTeamBackgroundColor(serverTeamName:String,serverName:String){
+        // サーバープレイヤー名の背景色を赤にする
+        if serverTeamName == "A"{
+            if serverName == delegate?.player1NameParent.text{
+                delegate?.player1NameParent.backgroundColor = UIColor.red
+                delegate?.player3NameParent.backgroundColor = UIColor.clear
+            }else if serverName == delegate?.player3NameParent.text{
+                delegate?.player1NameParent.backgroundColor = UIColor.clear
+                delegate?.player3NameParent.backgroundColor = UIColor.red
+            }
             delegate?.player2NameParent.backgroundColor = UIColor.clear
             delegate?.player4NameParent.backgroundColor = UIColor.clear
         }else{
-            delegate?.player2NameParent.backgroundColor = UIColor.red
-            delegate?.player4NameParent.backgroundColor = UIColor.red
+            if serverName == delegate?.player2NameParent.text{
+                delegate?.player2NameParent.backgroundColor = UIColor.red
+                delegate?.player4NameParent.backgroundColor = UIColor.clear
+            }else if serverName == delegate?.player4NameParent.text{
+                delegate?.player2NameParent.backgroundColor = UIColor.clear
+                delegate?.player4NameParent.backgroundColor = UIColor.red
+            }
             delegate?.player1NameParent.backgroundColor = UIColor.clear
             delegate?.player3NameParent.backgroundColor = UIColor.clear
         }

@@ -25,9 +25,9 @@ class VerticalMatchScreenOperationsPresenter : MatchScreenOperationsParentPresen
         delegate?.rightSetNumParent.text = "\(score.numberOfSetsForTeamB)"
     }
     
-    override func changeServerTeamBackgroundColor(serverName:String){
+    override func changeServerTeamBackgroundColor(serverTeamName:String,serverName:String){
         // 仮：サーバーチームを色変え
-        if serverName == "A"{
+        if serverTeamName == "A"{
             delegate?.rightGameLineParent.backgroundColor = UIColor.red
             delegate?.leftGameLineParent.backgroundColor = UIColor.clear
         }else{

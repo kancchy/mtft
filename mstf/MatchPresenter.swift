@@ -77,16 +77,15 @@ class MatchPresenter:MatchProtocol{
             }else{
                 game.serverPlayerName = set.getNextServerName(playerName1:score.playerName2,playerName2:score.playerName4)
             }
+            screenOperator?.changeServerTeamBackgroundColor(serverTeamName: game.server,serverName: game.serverPlayerName);
         }
-        // TODO:チームではなくサーバープレーヤーだけを色つけたい
-        screenOperator?.changeServerTeamBackgroundColor(serverName: game.server);
-        //screenOperator?.changeServerTeamBackgroundColor(serverName: game.serverPlayerName);
     }
     
     func startTieBreak(serverName:String){
-        game = TieBreak();
+        game = TieBreak(playeraName1: score.playerName1, playeraName2: score.playerName2, playeraName3: score.playerName3, playeraName4: score.playerName4);
         game.server = serverName
-        screenOperator?.changeServerTeamBackgroundColor(serverName: serverName);
+        // TODO:サーバーチームも渡したい
+        //screenOperator?.changeServerTeamBackgroundColor(serverName: serverName);
         screenOperator?.disableFaultBtn(teamName:game.server)
     }
     
@@ -114,14 +113,16 @@ class MatchPresenter:MatchProtocol{
         // Action初期化時にタイトル, スタイル, 押された時に実行されるハンドラを指定する
         // 第3引数のUIAlertActionStyleでボタンのスタイルを指定する
         // OKボタン（左）
-        let defaultAction: UIAlertAction = UIAlertAction(title: serverPlayerName2, style: UIAlertAction.Style.default, handler:{(action: UIAlertAction!) -> Void in
+        let defaultAction: UIAlertAction = UIAlertAction(title: serverPlayerName2, style: UIAlertAction.Style.default, handler:{ [self](action: UIAlertAction!) -> Void in
             // ボタンが押された時の処理
-            self.game.serverPlayerName = serverPlayerName2
+            game.serverPlayerName = serverPlayerName2
+            screenOperator?.changeServerTeamBackgroundColor(serverTeamName: game.server,serverName: serverPlayerName2);
         })
         // キャンセルボタン（右）
-        let cancelAction: UIAlertAction = UIAlertAction(title: serverPlayerName1, style: UIAlertAction.Style.cancel, handler:{(action: UIAlertAction!) -> Void in
+        let cancelAction: UIAlertAction = UIAlertAction(title: serverPlayerName1, style: UIAlertAction.Style.cancel, handler:{ [self](action: UIAlertAction!) -> Void in
             // ボタンが押された時の処理を書く（クロージャ実装）
-            self.game.serverPlayerName = serverPlayerName1
+            game.serverPlayerName = serverPlayerName1
+            screenOperator?.changeServerTeamBackgroundColor(serverTeamName: game.server,serverName: serverPlayerName1);
         })
 
         // ③ UIAlertControllerにActionを追加
