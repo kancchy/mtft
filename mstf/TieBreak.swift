@@ -8,11 +8,20 @@
 import Foundation
 
 class TieBreak : GameParent{
-    init(playeraName1:String, playeraName2:String, playeraName3:String, playeraName4:String) {
+    init(playeraName1:String,
+         playeraName2:String,
+         playeraName3:String,
+         playeraName4:String,
+         server:String,
+         serverPlayerName:String,
+         previousServerTeam:String,
+         previousServerPlayerName:String) {
         self.playerName1 = playeraName1;
         self.playerName2 = playeraName2;
         self.playerName3 = playeraName3;
         self.playerName4 = playeraName4;
+        self.previousServerTeam = previousServerTeam;
+        self.previousServerPlayerName = previousServerPlayerName;
         super.init(pointBeforeTheEnd: 6)
         activePoint = GamePointForTieBreak(server:server, serverPlayerName:serverPlayerName, receiver: "");
     };
@@ -21,6 +30,9 @@ class TieBreak : GameParent{
     var playerName2:String = "";
     var playerName3:String = "";
     var playerName4:String = "";
+    var previousServerTeam:String = "";
+    var previousServerPlayerName:String = "";
+    
 
     override func scored(point:PointParent){
         activePoint.scoredTeam = scoredTeam
@@ -32,7 +44,16 @@ class TieBreak : GameParent{
             gamePointCountTeamB += 1
         }
         
-        if gamePoint.count % 2 > 0 {
+        if gamePoint.count == 1{
+            if previousServerTeam == "A" {
+                server = "A"
+                serverPlayerName = previousServerPlayerName == playerName1 ? playerName3 : playerName1
+            } else {
+                server = "B"
+                serverPlayerName = previousServerPlayerName == playerName2 ? playerName4 : playerName2
+            }
+        }
+        else if gamePoint.count % 2 > 0 {
           //サーバを交代
             if server == "A" {
                 server = "B"
@@ -47,8 +68,8 @@ class TieBreak : GameParent{
     
     // 次のサーバープレイヤー名を取得
     func getNextServerName(playerName1:String,playerName2:String) -> String{
-        let lastIndex: Int? = gamePoint.indices.last
-        return gamePoint[lastIndex! - 1].serverPlayerName == playerName1 ? playerName2 : playerName1
+        let lastIndex: Int? = gamePoint.count
+        return gamePoint[lastIndex!-2].serverPlayerName == playerName1 ? playerName2 : playerName1
     }
     
     override func cnvPoint(point:Int) -> String{

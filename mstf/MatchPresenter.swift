@@ -46,7 +46,7 @@ class MatchPresenter:MatchProtocol{
             game.scored(point: game.activePoint)
             
             if (set.isTieBreak()) {
-                screenOperator?.changeServerTeamBackgroundColor(serverName: game.server)
+                screenOperator?.changeServerTeamBackgroundColor(serverTeamName: game.server,serverName: game.serverPlayerName)
             }
         }
     }
@@ -72,18 +72,41 @@ class MatchPresenter:MatchProtocol{
             self.displayPopup(serverTeamName:serverName)
         }else{
             // 2ゲーム目以降はサーバープレイヤー名を取得する
-            if game.server == "A"{
-                game.serverPlayerName = set.getNextServerName(playerName1:score.playerName1,playerName2:score.playerName3)
-            }else{
-                game.serverPlayerName = set.getNextServerName(playerName1:score.playerName2,playerName2:score.playerName4)
-            }
+            game.serverPlayerName = getServerPlayerName()
             screenOperator?.changeServerTeamBackgroundColor(serverTeamName: game.server,serverName: game.serverPlayerName);
         }
     }
     
-    func startTieBreak(serverName:String){
-        game = TieBreak(playeraName1: score.playerName1, playeraName2: score.playerName2, playeraName3: score.playerName3, playeraName4: score.playerName4);
+    // 次のサーバープレイヤー名を取得する
+    func getServerPlayerName()-> String{
+        if game.server == "A"{
+            return set.getNextServerName(playerName1:score.playerName1,playerName2:score.playerName3)
+        }else{
+            return set.getNextServerName(playerName1:score.playerName2,playerName2:score.playerName4)
+        }
+    }
+    
+    func startTieBreak(serverName:String,serverPlayerName:String){
+        
+        game = TieBreak(
+            playeraName1: score.playerName1,
+            playeraName2: score.playerName2,
+            playeraName3: score.playerName3,
+            playeraName4: score.playerName4,
+            server: serverName,
+            serverPlayerName: serverPlayerName,
+            previousServerTeam:game.server,
+            previousServerPlayerName:game.serverPlayerName);
+        
         game.server = serverName
+        
+        if game.server == "A"{
+            game.serverPlayerName = set.getNextServerName(playerName1:score.playerName1,playerName2:score.playerName3)
+        }else{
+            game.serverPlayerName = set.getNextServerName(playerName1:score.playerName2,playerName2:score.playerName4)
+        }
+        screenOperator?.changeServerTeamBackgroundColor(serverTeamName: game.server,serverName: game.serverPlayerName);
+        
         // TODO:サーバーチームも渡したい
         //screenOperator?.changeServerTeamBackgroundColor(serverName: serverName);
         screenOperator?.disableFaultBtn(teamName:game.server)
@@ -140,7 +163,7 @@ class MatchPresenter:MatchProtocol{
 
         if set.isTieBreak(){
             // タイブレークなので終了でない
-            self.startTieBreak(serverName:set.getNextServerTeam())
+            self.startTieBreak(serverName:set.getNextServerTeam(),                               serverPlayerName: getServerPlayerName())
             return
         }
         
