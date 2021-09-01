@@ -35,7 +35,7 @@ class TieBreak : GameParent{
     
 
     override func scored(point:PointParent){
-        activePoint.scoredTeam = scoredTeam
+        //activePoint.scoredTeam = scoredTeam
 
         gamePoint.append(point)
         if point.scoredTeam == "A" {
@@ -69,7 +69,7 @@ class TieBreak : GameParent{
     // 次のサーバープレイヤー名を取得
     func getNextServerName(playerName1:String,playerName2:String) -> String{
         let lastIndex: Int? = gamePoint.count
-        return gamePoint[lastIndex!-2].serverPlayerName == playerName1 ? playerName2 : playerName1
+        return gamePoint[lastIndex!-3].serverPlayerName == playerName1 ? playerName2 : playerName1
     }
     
     override func cnvPoint(point:Int) -> String{

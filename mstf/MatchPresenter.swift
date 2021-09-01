@@ -72,19 +72,24 @@ class MatchPresenter:MatchProtocol{
             self.displayPopup(serverTeamName:serverName)
         }else{
             // 2ゲーム目以降はサーバープレイヤー名を取得する
-            game.serverPlayerName = getServerPlayerName()
+            if game.server == "A"{
+                game.serverPlayerName = set.getNextServerName(playerName1:score.playerName1,playerName2:score.playerName3)
+            }else{
+                game.serverPlayerName = set.getNextServerName(playerName1:score.playerName2,playerName2:score.playerName4)
+            }
+            //game.serverPlayerName = getServerPlayerName()
             screenOperator?.changeServerTeamBackgroundColor(serverTeamName: game.server,serverName: game.serverPlayerName);
         }
     }
     
     // 次のサーバープレイヤー名を取得する
-    func getServerPlayerName()-> String{
-        if game.server == "A"{
-            return set.getNextServerName(playerName1:score.playerName1,playerName2:score.playerName3)
-        }else{
-            return set.getNextServerName(playerName1:score.playerName2,playerName2:score.playerName4)
-        }
-    }
+//    func getServerPlayerName()-> String{
+//        if game.server == "A"{
+//            return set.getNextServerName(playerName1:score.playerName1,playerName2:score.playerName3)
+//        }else{
+//            return set.getNextServerName(playerName1:score.playerName2,playerName2:score.playerName4)
+//        }
+//    }
     
     func startTieBreak(serverName:String,serverPlayerName:String){
         
@@ -162,8 +167,14 @@ class MatchPresenter:MatchProtocol{
         screenOperator?.updateGameCount(set:set);
 
         if set.isTieBreak(){
+            let serverPlayerName :String
+            if game.server == "B"{
+                serverPlayerName =  set.getNextServerName(playerName1:score.playerName1,playerName2:score.playerName3)
+            }else{
+                serverPlayerName =  set.getNextServerName(playerName1:score.playerName2,playerName2:score.playerName4)
+            }
             // タイブレークなので終了でない
-            self.startTieBreak(serverName:set.getNextServerTeam(),                               serverPlayerName: getServerPlayerName())
+            self.startTieBreak(serverName:set.getNextServerTeam(), serverPlayerName: serverPlayerName)
             return
         }
         
