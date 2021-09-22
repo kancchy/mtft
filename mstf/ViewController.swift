@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 extension UINavigationController {
     open override var shouldAutorotate: Bool {
@@ -29,7 +30,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        let realm = try! Realm()
+        let user = User()
+        user.name = "カンダ"
+        user.age = 33
+        user.list.append("aaa")
+        user.list.append("bbb")
+        user.list.append("ccc")
+
+
+        try! realm.write {
+            realm.add(user)
+        }
         // Firebaseレポート用のクラッシュ処理
         // https://firebase.google.com/docs/crashlytics/test-implementation?platform=ios&authuser=3
         let button = UIButton(type: .roundedRect)
