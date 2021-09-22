@@ -22,6 +22,8 @@ target 'mstf' do
 
   # Pods for mstf
 
+pod 'RealmSwift', '10.15.0'
+
   target 'mstfTests' do
     inherit! :search_paths
     # Pods for testing
